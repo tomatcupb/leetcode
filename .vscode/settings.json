@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "D:\\Software\\python27\\python.exe",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    }
+}
