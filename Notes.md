@@ -19,6 +19,7 @@
         + (left+right)/2 (初级写法，有相加溢出的风险)
         + left + (right - left)/2 （中级写法，一定程度上避免了相加的大数溢出，但是当left为很小的负数，也有溢出的可能）
         + (left+right)>>>1 （高级写法，源于java源码binarySearch的写法[总结](https://leetcode-cn.com/problems/guess-number-higher-or-lower/solution/shi-fen-hao-yong-de-er-fen-cha-zhao-fa-mo-ban-pyth/)）
+    + 找到target但是不反悔索引，二是一直迭代，知道剩一个元素（34）
 
 5. 回溯
     + 关键因素：外层循环（有时也没有）+内层的backtrack方法：
