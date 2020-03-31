@@ -12,54 +12,50 @@ import java.util.List;
 // @lc code=start
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        // ArrayList<List<Integer>> ans = new ArrayList<List<Integer>>();
         // Arrays.sort(candidates);
-        // backtrack(target, new ArrayList<>(), ans, 0, candidates);
+        // List<List<Integer>> ans = new ArrayList<>();
+        // backtrack(ans, new LinkedList<Integer>(), 0,candidates, target);
         // return ans;
 
-        ArrayList<List<Integer>> ans = new ArrayList<List<Integer>>();
         Arrays.sort(candidates);
-        backtrack(target, new LinkedList<>(), ans, candidates, 0);
+        List<List<Integer>> ans = new ArrayList<>();
+        backtrack(ans, new LinkedList<Integer>(), 0,candidates, target, 0);
         return ans;
     }
 
+    // private void backtrack(List<List<Integer>> ans, LinkedList<Integer> list, int start,int[] candidates, int target){
+    //     if(target == 0){
+    //         ans.add(new LinkedList<>(list));
+    //         return;
+    //     }
 
+    //     for(int i = start; i<candidates.length; i++){
+    //         if(candidates[i]>target){
+    //             break;
+    //         }
+    //         list.add(candidates[i]);
+    //         // target = target - candidates[i]会出错，因为removeLast后，没有更新target。
+    //         // 所以最好backtrack方法中的参数一行写进去
+    //         backtrack(ans, list, i,candidates, target - candidates[i]);
+    //         list.removeLast();
+    //     }
+    // }
 
-    private void backtrack(int residue, LinkedList<Integer> list, ArrayList<List<Integer>> ans, int[] candidates, int start){
-        if(residue == 0){
+    private void backtrack(List<List<Integer>> ans, LinkedList<Integer> list, int start,int[] candidates, int target, int sum){
+        if(sum == target){
             ans.add(new LinkedList<>(list));
             return;
         }
 
-        for(int i = start; i<candidates.length; i++){
-            if(residue<0) break;
+        for(int i = start; i< candidates.length; i++){
+            if(sum + candidates[i] > target){
+                break;
+            }
             list.add(candidates[i]);
-            backtrack(residue-candidates[i], list, ans, candidates, i);
+            backtrack(ans, list, i, candidates, target, sum+candidates[i]);
             list.removeLast();
         }
     }
-
-    // private void backtrack(int target, ArrayList<Integer> list, ArrayList<List<Integer>> ans, int start, int[] candidates){
-    //     if(sumList(list)==target){
-    //         ans.add(new ArrayList<>(list));
-    //         return;
-    //     }
-
-    //     for(int i = start; i< candidates.length; i++){
-    //         if(sumList(list)>target) break;
-    //         list.add(candidates[i]);
-    //         backtrack(target, list, ans, i, candidates);
-    //         list.remove(list.size()-1);
-    //     }
-    // }
-
-    // private int sumList(ArrayList<Integer> list){
-    //     int sum = 0;
-    //     for(int num:list){
-    //         sum+=num;
-    //     }
-    //     return sum;
-    // }
 }
 // @lc code=end
 

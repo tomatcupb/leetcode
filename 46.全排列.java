@@ -13,25 +13,27 @@ import java.util.List;
 // @lc code=start
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<List<Integer>>();
-        int[] visited = new int[nums.length];
-        backTrack(new LinkedList<>(), nums, ans, visited);
+        boolean[] visited = new boolean[nums.length];
+        ArrayList<List<Integer>> ans = new ArrayList<>();
+        backtrack(ans, new LinkedList<>(), nums, visited);
         return ans;
     }
 
-    private void backTrack(LinkedList<Integer> list, int[] nums, List<List<Integer>> ans, int[] visited){
-        if(list.size() == nums.length){
+    private void backtrack(List<List<Integer>> ans, LinkedList<Integer> list, int[] nums, boolean[] visited){
+        if(list.size()==nums.length){
             ans.add(new LinkedList<>(list));
             return;
         }
-        for(int i = 0; i< nums.length; i++){
-            if(visited[i]==1) continue;
-            list.add(nums[i]);
-            visited[i]=1;
-            backTrack(list, nums, ans, visited);
-            list.removeLast();
-            visited[i] = 0;
+        for(int i = 0; i<nums.length; i++){
+            if(!visited[i]){
+                list.add(nums[i]);
+                visited[i] = true;
+                backtrack(ans, list, nums, visited);
+                list.removeLast();
+                visited[i] = false;
+            }
         }
+
     }
 }
 // @lc code=end

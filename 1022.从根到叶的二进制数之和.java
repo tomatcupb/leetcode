@@ -20,34 +20,51 @@ import java.util.List;
  */
 class Solution {
     public int sumRootToLeaf(TreeNode root) {
-        if(root == null) return 0;
-        return dfs(root, 0);
+        // if(root == null) return 0;
+        // return dfs(root, 0);
+        
+
+        // ArrayList<Integer> list = new ArrayList<>();
+        // backtrack(root, list, 0);
+        // int ans = 0;
+        // for(Integer i : list){
+        //     ans += i;
+        // }
+        // return ans;
+
+        return helper(root, 0);
     }
 
-    // private void backtrack(TreeNode root, List<List<Integer>> ans, LinkedList<Integer> list){
+    private int helper(TreeNode root, int sum){
+        if(root == null) return 0;
+        sum = 2 *sum + root.val;
+        if(root.left == null && root.right == null){
+            return sum;
+        }
+        return helper(root.left, sum) + helper(root.right, sum);
+    }
+
+    // private void backtrack(TreeNode root, ArrayList<Integer> list, int num){
     //     if(root == null) return;
+    //     num = num*2+root.val;
     //     if(root.left == null && root.right == null){
-    //         list.add(root.val);
-    //         ans.add(new LinkedList<>(list));
-    //         list.removeLast();
+    //         list.add(num);
     //         return;
     //     }
-    //     list.add(root.val);
-    //     dfs(root.left, list);
-    //     dfs(root.right, list);
-        
+    //     backtrack(root.left, list, num);
+    //     backtrack(root.right, list, num);
     //     return;
     // }
     
 
-    private int dfs(TreeNode root, int num){
-        int sum = 0;
-        num = num * 2 + root.val;
-        if(root.left == null && root.right == null) return num;
-        if(root.left != null) sum = sum+dfs(root.left, num);
-        if(root.right != null) sum = sum+dfs(root.right, num);
-        return sum;
-    }
+    // private int dfs(TreeNode root, int num){
+    //     int sum = 0;
+    //     num = num * 2 + root.val;
+    //     if(root.left == null && root.right == null) return num;
+    //     if(root.left != null) sum = sum+dfs(root.left, num);
+    //     if(root.right != null) sum = sum+dfs(root.right, num);
+    //     return sum;
+    // }
 }
 // @lc code=end
 
