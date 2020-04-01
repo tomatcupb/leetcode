@@ -1,6 +1,6 @@
 1. 数组
     + 提到数组，并且有苛刻条件，比如说控制空间复杂度，可以考虑**排序操作**；
-    + 给定正数且不重复数组nums，考虑方法nums的元素值与新数组的下标相对应的方法。即numsIndex[nums[i]] = i;即把nums的值当作numsIndex的索引，即numsIndex中nums元素越大越靠后。
+    + 给定正数且不重复数组nums，考虑方法nums的元素值与新数组的下标相对应的方法。即numsIndex[nums[i]] = i;即把nums的值当作numsIndex的索引，即numsIndex中nums元素越大越靠后。（448）
     + 需要map<Integer, E>一类的数据结构时，如果key的数量时有限的，可以构造长度为该数量的数组，数组的索引即为key（299）
 
 2. 二叉树
@@ -20,7 +20,7 @@
         + (left+right)/2 (初级写法，有相加溢出的风险)
         + left + (right - left)/2 （中级写法，一定程度上避免了相加的大数溢出，但是当left为很小的负数，也有溢出的可能）
         + (left+right)>>>1 （高级写法，源于java源码binarySearch的写法[总结](https://leetcode-cn.com/problems/guess-number-higher-or-lower/solution/shi-fen-hao-yong-de-er-fen-cha-zhao-fa-mo-ban-pyth/)）
-    + 找到target但是不反悔索引，二是一直迭代，知道剩一个元素（34）
+    + 找到target但是不返回索引，而是一直迭代，直到剩一个元素（34）
 
 5. 回溯
     + 首先根据题意画出**递归树**，再根据递归树写代码；其实难点在于画出递归树，画出来以后讨论接近！
