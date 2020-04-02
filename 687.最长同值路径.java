@@ -18,36 +18,53 @@ import java.util.Queue;
  * }
  */
 class Solution {
-        int max = -1;
+        int max = 0;
     public int longestUnivaluePath(TreeNode root) {
-        if(root == null){
-            return 0;
-        }
-        max = longPath(root)>max?longPath(root):max;
-        longestUnivaluePath(root.left);
-        longestUnivaluePath(root.right);
+        // if(root == null || (root.left == null && root.right == null)) return 0;
+        // int len = maxLen(root);
+        // max = len>max? len:max;
+        // longestUnivaluePath(root.left);
+        // longestUnivaluePath(root.right);
+        // return max;
+
+
+        // if(root == null || (root.left == null && root.right == null)) return 0;
+        helperPro(root);
         return max;
     }
 
-    private int longPath(TreeNode root){
-        if(root == null){
-            return 0;
-        }
-        int leftLen = root.left != null && root.val == root.left.val?1:0;
-        int rightLen = root.right != null && root.val == root.right.val?1:0;
-        return helper(root.left)+helper(root.right)+leftLen+rightLen;
-    }
+    // private int maxLen(TreeNode root){
+    //     if(root == null || (root.left == null && root.right == null)) return 0;
+    //     int left = (root.left != null && root.left.val==root.val)?helper(root.left, root, 0):0;
+    //     int right = (root.right != null && root.right.val==root.val)?helper(root.right, root, 0):0;
+    //     return left+right;
+    // }
 
-    private int helper(TreeNode root) {
-        int path = 0;
-        if (root == null)
-            return 0;
-        if ((root.left != null && root.val == root.left.val) || (root.right != null && root.val == root.right.val)) {
-            path++;
-            return path + Math.max(helper(root.left), helper(root.right));
-        } else {
-            return 0;
+
+    // 只算一个节点的单边最大值
+    // private int helper(TreeNode root, TreeNode pre, int num){
+    //     if(root==null || (pre!=null && root.val != pre.val)) return num;
+    //     if(pre!=null && root.val == pre.val) num++;
+    //     int left = helper(root.left, root, num);
+    //     int right = helper(root.right, root, num);
+    //     return Math.max(left, right);
+    // }
+
+
+    // 直接一次遍历的过程中，同时计算保留两边之和相加的最大值
+    private int helperPro(TreeNode root){
+        if(root == null) return 0;
+        int left = helperPro(root.left);
+        int right = helperPro(root.right);
+        int arrowLeft = 0, arrowRight = 0;
+        if(root.left!=null && root.val == root.left.val){
+            arrowLeft += left + 1;
         }
+        if(root.right!=null && root.val == root.right.val){
+            arrowRight += right+1;
+        }
+        max= Math.max(max, arrowRight+arrowLeft);
+        return Math.max(arrowLeft, arrowRight);
     }
 }
 // @lc code=end
