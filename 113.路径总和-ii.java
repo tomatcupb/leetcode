@@ -36,21 +36,43 @@ class Solution {
         //     }
         // }
         // return list;
-        backtrack(root, sum, list);
+
+        // 1. 标准简单回溯，效率较低
+        // backtrack(root, sum, list);
+        // return ans;
+
+        // 2. 回溯优化, 效率有提高
+        if(root==null) return ans;
+        backtrack(root, sum);
         return ans;
     }
+
+    // List<List<Integer>> ans = new ArrayList<List<Integer>>();
+    // List<Integer> list = new ArrayList<Integer>();
+    // private void backtrack(TreeNode root, int sum, List<Integer> list) {
+    //     if (root == null) return;
+    //     if (sum == root.val && root.left == null && root.right == null) {
+    //         list.add(root.val);
+    //         ans.add(new ArrayList<>(list));
+    //         return;
+    //     }
+    //     list.add(root.val);
+    //     backtrack(root.left, sum - root.val, new ArrayList<>(list));
+    //     backtrack(root.right, sum - root.val, new ArrayList<>(list));
+    // }
+
     List<List<Integer>> ans = new ArrayList<List<Integer>>();
     List<Integer> list = new ArrayList<Integer>();
-    private void backtrack(TreeNode root, int sum, List<Integer> list){
-        if(root==null) return;
-        if(sum==root.val && root.left==null && root.right==null){
-            list.add(root.val);
-            ans.add(new ArrayList<>(list));
+    private void backtrack(TreeNode root, int sum) {
+        list.add(root.val);
+        if (root.left == null && root.right == null) {
+            if(sum == root.val) ans.add(new ArrayList<>(list));
+            list.remove(list.size()-1);
             return;
         }
-        list.add(root.val);
-        backtrack(root.left, sum-root.val, new ArrayList<>(list));
-        backtrack(root.right, sum-root.val, new ArrayList<>(list));
+        if(root.left!=null) backtrack(root.left, sum - root.val);
+        if(root.right != null) backtrack(root.right, sum - root.val);
+        list.remove(list.size()-1);
     }
 }
 // @lc code=end

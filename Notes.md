@@ -44,6 +44,7 @@
 8. 位运算
     + x/2 = x>>1, x%2 = x & 1
     + a^b^c = a^c^b, a^a=0, 0^a=a
+    + x & ~x = 0,x & ~0 =x（137）
 
 9. 卡int边界值时，不妨把int用Integer代替，不用设Interger.MAX_VALUE，直接赋初始值为null
 
