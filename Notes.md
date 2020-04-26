@@ -15,14 +15,17 @@
     + **尾插法**：（86）
     + **头插法**
     + 想象，改指针而不动元素（翻转链表）
+    + 链表拆分+合并
 
 1. 二分法
+    + 题目：有序序列+时间复杂度o(logn)，应考虑二分法（300）
+    + java源码中的二分法的判断条件和返回值要注意
     + 时刻注意二分条件（left<=right）的等号！
     + 中间值mid的写法
         + (left+right)/2 (初级写法，有相加溢出的风险)
         + left + (right - left)/2 （中级写法，一定程度上避免了相加的大数溢出，但是当left为很小的负数，也有溢出的可能）
         + (left+right)>>>1 （高级写法，源于java源码binarySearch的写法[总结](https://leetcode-cn.com/problems/guess-number-higher-or-lower/solution/shi-fen-hao-yong-de-er-fen-cha-zhao-fa-mo-ban-pyth/)）
-    + 找到target但是不返回索引，而是一直迭代，直到剩一个元素（34）
+    + 找到target但是不返回索引，而是一直迭代，直到剩一个元素(34，300)
     + 时刻防止溢出，乘法用除法代替，不行就用long类型(367，441)
 
 1. 回溯
