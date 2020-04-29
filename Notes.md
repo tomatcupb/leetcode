@@ -57,6 +57,10 @@
     + >>>：无符号右移。无论是正数还是负数，高位通通补0。
     + 对于正数而言，>>和>>>没区别。负数区别很大！[Java中带符号右移和无符号右移的区别](https://blog.csdn.net/zerolaw/article/details/81081823)
 
+1. 数据结构
+    + 优先队列PriorityQueue解决top K问题（347）
+    + java的Map.Entry，解决java没有pair的数据结构问题（365）
+
 1. 卡int边界值时，不妨把int用Integer代替，不用设Interger.MAX_VALUE，直接赋初始值为null
 
 
@@ -64,4 +68,18 @@
     + Java中，str.split函数切字符串的时候，为了防止切出空字符串，先对字符串trim操作，去除头尾的空格。匹配多个空格要贪婪匹配“\\s+”(819)
     + 需要公共操作的int不要作为形参传递，而是作为类变量
     + 连续的StringBuilder.inser(0,"str")可以改写为sb.append,最后再一次reverse()(43)
+    + Arrays.sort(arr, lambda)的运用（56, 1353）
+    ```
+    Arrays.sort(events, (e1, e2)-> {
+            if(e1[1]==e2[1]){
+                return e1[0]-e2[0];
+            } else {
+                return e1[1]-e2[1];
+            }
+        });
+
+    Arrays.sort(events, (e1, e2)-> {return e1[1]==e2[1]?e1[0]-e2[0]:e1[1]-e2[1];});
+
+    Arrays.sort(events, (e1, e2)-> e1[1]==e2[1]?e1[0]-e2[0]:e1[1]-e2[1]);
+    ```
 
