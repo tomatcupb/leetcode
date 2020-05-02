@@ -61,6 +61,7 @@
 1. 数据结构
     + 优先队列PriorityQueue解决top K问题（347）
     + java的Map.Entry，解决java没有pair的数据结构问题（365）
+    + 逆序处理要想到使用栈（445）
 
 1. 卡int边界值时，不妨把int用Integer代替，不用设Interger.MAX_VALUE，直接赋初始值为null
 
