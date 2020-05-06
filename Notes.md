@@ -29,6 +29,7 @@
         + (left+right)>>>1 （高级写法，源于java源码binarySearch的写法[总结](https://leetcode-cn.com/problems/guess-number-higher-or-lower/solution/shi-fen-hao-yong-de-er-fen-cha-zhao-fa-mo-ban-pyth/)）
     + 找到target但是不返回索引，而是一直迭代，直到剩一个元素(34，300)
     + 时刻防止溢出，乘法用除法代替，不行就用long类型(367，441)
+    + 前面一堆０，后面一堆１，然后寻找第一个１的二分问题(153)
 
 1. 回溯
     + 首先根据题意画出**递归树**，再根据递归树写代码；其实难点在于画出递归树，画出来以后讨论接近！
