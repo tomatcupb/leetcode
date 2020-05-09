@@ -14,60 +14,98 @@
  * }
  */
 class Solution {
+    // 这道题有一个很关键的点，就是只有两个节点的时候要确保通过快慢指针能够打断链表！
     public ListNode sortList(ListNode head) {
-        if(head==null||head.next==null) return head;
-        // 没有条件，创造条件。自己添加头节点，最后返回时去掉即可。
-        ListNode newHead=new ListNode(-1);
-        newHead.next=head;
-        return quickSort(newHead,null);
+        // 快排的效率较低（8.65%，5.88%）
+        // if(head==null || head.next == null) return head;
+        // ListNode dummyHead =  new ListNode(-1);
+        // dummyHead.next = head;
+        // return quickSort(dummyHead, null);
+
+        // 归并效率提高明显（72.4%，5.88%）
+        return mergeSort(head);
     }
-    // 带头结点的链表快速排序
-    private ListNode quickSort(ListNode head,ListNode end){
-        // if (head==end||head.next==end||head.next.next==end) return head;
-        // // 将小于划分点的值存储在临时链表中
-        // ListNode tmpHead=new ListNode(-1);
-        // // partition为划分点，p为链表指针，tp为临时链表指针
-        // ListNode partition=head.next;
-        // ListNode p=partition;
-        // ListNode tp=tmpHead;
-        // // 将小于划分点的结点放到临时链表中
-        // while (p.next!=end){
-        //     if (p.next.val<partition.val){
-        //         tp.next=p.next;
-        //         tp=tp.next;
-        //         p.next=p.next.next;
-        //     }else {
-        //         p=p.next;
-        //     }
+
+    private ListNode mergeSort(ListNode head){
+        if(head== null || head.next == null) return head;
+        ListNode slow = head;
+        // 此处需要注意，fast要和slow不相等，否则两个节点的时候递归出不来！！！
+        ListNode fast = head.next.next;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode right = mergeSort(slow.next);
+        slow.next = null;//把链表以slow节点拆开！！
+        ListNode left = mergeSort(head);
+
+        // ListNode fast = head, slow = head, pre = null;
+        // while (fast != null && fast.next != null) {
+        //     pre = slow;
+        //     slow = slow.next;
+        //     fast = fast.next.next;
         // }
-        // // 合并临时链表和原链表，将原链表接到临时链表后面即可
-        // tp.next=head.next;
-        // // 将临时链表插回原链表，注意是插回！（不做这一步在对右半部分处理时就断链了）
-        // head.next=tmpHead.next;
-        // quickSort(head,partition);
-        // quickSort(partition,end);
-        // // 题目要求不带头节点，返回结果时去除
-        // return head.next;
+        // 打断链表！
+        // pre.next = null;
+        // ListNode left = mergeSort(head);
+        // ListNode right = mergeSort(slow);
 
-        if (head==end||head.next==end||head.next.next==end) return head;
+        return merge(left, right);
+    }
 
+    private ListNode merge(ListNode left, ListNode right){
         ListNode dummyHead = new ListNode(-1);
-        ListNode dummyCur = dummyHead;
-        ListNode cur = head;
-        int x = head.next.val;
-        while(cur.next != null){
-            if(cur.next.val<x){
-                dummyCur.next = cur.next;
-                dummyCur = dummyCur.next;
-                cur.next = cur.next.next;
-            } 
+        ListNode cur = dummyHead;
+        while(left!=null && right!=null){
+            if(left.val<right.val){
+                cur.next = left;
+                left = left.next;
+            } else{
+                cur.next = right;
+                right = right.next;
+            }
             cur = cur.next;
         }
-        dummyCur.next = head.next;
-        quickSort(head, end);
-        quickSort(head, end);
-
+        // 链表不需要这么写！！
+        // while(left!=null){
+        //     dummyHead.next = left;
+        //     left = left.next;
+        // }
+        // while(right!=null){
+        //     dummyHead.next = right;
+        //     right = right.next;
+        // }
+        cur.next = left == null? right:left;
+        return dummyHead.next;
     }
+
+
+    // head = dummyHead,tail = null
+    // private ListNode quickSort(ListNode head, ListNode tail){
+    //     if(head==null || head.next == tail || head.next.next == tail) return head;
+    //     ListNode smallHead = new ListNode(-1);
+    //     ListNode pivot = head.next;
+    //     ListNode cur = pivot;
+    //     ListNode smallCur = smallHead;
+        
+    //     while(cur!= null && cur.next != tail){
+    //         if(cur.next.val<pivot.val){
+    //             smallCur.next = cur.next;
+    //             smallCur = smallCur.next;
+    //             cur.next = cur.next.next;
+    //         } else{
+    //             cur = cur.next;
+    //         }
+    //     }
+    //     smallCur.next = pivot;
+    //     // 这一步是让dummyHead再次指向排序之后的头结点！！
+    //     // 保证链表每一次都是连上的
+    //     head.next=smallHead.next;
+
+    //     quickSort(head, pivot);
+    //     quickSort(pivot, tail);
+    //     return head.next;
+    // }
 }
 // @lc code=end
 
