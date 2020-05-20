@@ -61,7 +61,9 @@
 
 1. 数据结构
     + 优先队列PriorityQueue解决top K问题（347）
+        + PriorityQueue更新顺序的前提是要插入(删除)数据，如果仅仅是修改已经稳定队列的值或内容，而不进行插入或者删除，那么，这个顺序是不会变的
     + java的Map.Entry，解决java没有pair的数据结构问题（365）
+    + LinkedHashMap extends HashMap，保持插入的顺序，底层的entry不光有Node next, 还有Node before 和 Node after记录插入顺序（146）
     + 逆序处理要想到使用栈（445）
 
 1. 卡int边界值时，不妨把int用Integer代替，不用设Interger.MAX_VALUE，直接赋初始值为null
