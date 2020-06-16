@@ -39,6 +39,7 @@ class Solution {
         while(i<s.length() && j<s.length()){
             if(!set.contains(s.charAt(j))){
                 set.add(s.charAt(j++));
+                // 在这里更新max，可以避免最后一个字符也符合而一直不更新max的情况
                 max = Math.max(max, j-i);
             }else {
                 set.remove(s.charAt(i++));
