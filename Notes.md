@@ -45,6 +45,7 @@
         + 最优解，其实就是默认给出了一个比较条件。而不求最优解，而是直接问所有解，dp没有条件进行状态转化。
     + 空间优化，需要保存几个原来的最优解以获得新的解，就只开辟相应的空间（120）
     + 关键在于1.定义状态， 2.状态转化关系， 3.矩阵求解（股票买卖的几道题）
+    + dp写法与递归的融合(剑指Offer 46)
 
 1. 贪心
     + 贪心的效率比动态规划更高，但是需要找到并证明贪心法则的正确性
@@ -75,6 +76,9 @@
     + LinkedHashMap extends HashMap，保持插入的顺序，底层的entry不光有Node next, 还有Node before 和 Node after记录插入顺序（146）
     + 逆序处理要想到使用栈（445）
 
+1. 单调栈
+    + 84, 85
+
 1. 卡int边界值时，不妨把int用Integer代替，不用设Interger.MAX_VALUE，直接赋初始值为null
 
 
@@ -82,6 +86,8 @@
     + Java中，str.split函数切字符串的时候，为了防止切出空字符串，先对字符串trim操作，去除头尾的空格。匹配多个空格要贪婪匹配“\\s+”(819)
     + 需要公共操作的int不要作为形参传递，而是作为类变量
     + 连续的StringBuilder.inser(0,"str")可以改写为sb.append,最后再一次reverse()(43)
+    + String重写了compareTo方法
+    + compareTo方法是比不了基本数据类型数组元素的，需要升级为包装类
     + Arrays.sort(arr, lambda)的运用（56, 1353）
     ```
     Arrays.sort(events, (e1, e2)-> {
