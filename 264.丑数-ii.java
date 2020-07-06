@@ -21,6 +21,43 @@ class Solution {
         }
         // 1也是丑叔
         return ans[n-1];
+        /**
+         * 1
+         * p2
+         * p3
+         * p5
+         * Next = Math.min(2,3,5)
+         * 
+         * 1    2
+         *      p2
+         * p3
+         * p5
+         * Next = Math.min(3,5,4)
+         * 
+         * 1    2   3
+         *      p2
+         *      p3
+         * p5
+         * Next = Math.min(5,4,6)
+         * 
+         * 1    2   3   4
+         *          p2
+         *      p3
+         * p5
+         * Next = Math.min(5,6,6)
+         * 
+         * 1    2   3   4   5
+         *          p2
+         *      p3
+         *      p5
+         * Next = Math.min(6,10,6)
+         * 
+         * 1    2   3   4   5   6
+         *              p2
+         *          p3
+         *      p5
+         * Next = Math.min(10,9,8)
+         */
     }
 }
 // @lc code=end
